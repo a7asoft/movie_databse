@@ -30,7 +30,6 @@
             android:inputType="text"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text=""
             android:textSize="15sp" />
 
         <ImageButton

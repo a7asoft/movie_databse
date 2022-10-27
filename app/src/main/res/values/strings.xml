@@ -6,4 +6,7 @@
     <string name="synopsis">Synopsis:</string>
     <string name="search_movies">Search movies</string>
     <string name="popular_movies">Popular movies</string>
+    <string name="consent">We need your consent to access your device\'s files and camera in order to make your app experience the best.</string>
+    <string name="no_i_do_not_want_to">No, I do not want to</string>
+    <string name="i_get_it">I get it</string>
 </resources>
