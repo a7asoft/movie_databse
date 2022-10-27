@@ -11,7 +11,9 @@
     <color name="grey_100">#E9E9E9</color>
     <color name="yellow_600">#FFB300</color>
     <color name="transparent">#00000000</color>
-    <color name="background">#FFFFFF</color>
-    <color name="texts">#000000</color>
+    <color name="background">#000000</color>
+    <color name="texts">#FFFFFF</color>
+
+
 
 </resources>

@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/background"
     tools:context=".ui.main.MainActivity">
-
 
     <RelativeLayout
         android:id="@+id/search_container"
@@ -110,13 +109,15 @@
 
             <TextView
                 android:id="@+id/text_popular"
-                style="@style/text_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/sourcesanspro_black"
                 android:gravity="start"
+                android:scrollbarSize="20sp"
                 android:text="Popular"
+                android:textColor="@color/texts"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/hscroll" />
@@ -170,13 +171,16 @@
                 android:layout_marginHorizontal="32dp"
                 android:fontFamily="@font/sourcesanspro_bold"
                 android:gravity="center"
-                android:textColor="@color/black" />
+                android:textColor="@color/texts" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_retry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/background"
                 android:text="RETRY"
                 app:cornerRadius="30dp" />
 
