@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"
+    android:orientation="horizontal">
+
+    <View
+        android:layout_width="75dp"
+        android:layout_height="30dp"
+        android:background="@drawable/back_search" />
+
+    <View
+        android:layout_width="55dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/back_search" />
+
+    <View
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/back_search" />
+
+    <View
+        android:layout_width="125dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/back_search" />
+
+    <View
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/back_search" />
+
+</LinearLayout>
