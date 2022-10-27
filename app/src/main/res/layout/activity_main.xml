@@ -24,8 +24,9 @@
             android:layout_height="40dp"
             android:background="@color/transparent"
             android:fontFamily="@font/sourcesanspro_regular"
-            android:hint="Search movies"
+            android:hint="@string/search_movies"
             android:imeOptions="actionDone"
+            android:textColor="@color/texts"
             android:inputType="text"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
@@ -39,7 +40,8 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="8dp"
             android:background="?selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_outline_search_24" />
+            android:src="@drawable/ic_outline_search_24"
+            app:tint="@color/texts" />
 
     </RelativeLayout>
 
@@ -116,7 +118,7 @@
                 android:fontFamily="@font/sourcesanspro_black"
                 android:gravity="start"
                 android:scrollbarSize="20sp"
-                android:text="Popular"
+                android:text="@string/popular_movies"
                 android:textColor="@color/texts"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
@@ -180,8 +182,8 @@
                 android:layout_marginTop="16dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
+                android:text="@string/retry"
                 android:textColor="@color/background"
-                android:text="RETRY"
                 app:cornerRadius="30dp" />
 
         </LinearLayout>

@@ -5,15 +5,27 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.ionix.moviedatabase.R
 import com.ionix.moviedatabase.data.remote.dto.Movie
 import com.ionix.moviedatabase.databinding.ItemMovieBinding
 
 class MoviesAdapter(private val docs: MutableList<Movie>, private val context: Context) :
     RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+
+    interface OnItemTap {
+        fun onTap(movie: Movie)
+    }
+
+    fun setItemTapListener(l: OnItemTap) {
+        onTapListener = l
+    }
+
+    private var onTapListener: OnItemTap? = null
 
     fun updateList(mPosts: List<Movie>) {
         docs.clear()
@@ -36,6 +48,10 @@ class MoviesAdapter(private val docs: MutableList<Movie>, private val context: C
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .into(itemBinding.ivMoviePoster)
+
+            itemBinding.root.setOnClickListener {
+                onTapListener?.onTap(movie)
+            }
         }
     }
 
@@ -45,7 +61,7 @@ class MoviesAdapter(private val docs: MutableList<Movie>, private val context: C
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //holder.itemView.animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.rv_item_anim)
+        holder.itemView.animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.rv_item_anim)
         return holder.bind(docs[position])
     }
 

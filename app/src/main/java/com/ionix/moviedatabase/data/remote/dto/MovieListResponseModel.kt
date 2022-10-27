@@ -1,6 +1,7 @@
 package com.ionix.moviedatabase.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class MovieListResponseModel(
     @SerializedName("items")
@@ -8,7 +9,8 @@ data class MovieListResponseModel(
 
     @SerializedName("errorMessage")
     val errorMessage: String
-)
+) : Serializable
+
 
 data class Movie(
     @SerializedName("id")
@@ -67,7 +69,7 @@ data class Movie(
 
     @SerializedName("starList")
     val starList: List<RList>
-)
+) : Serializable
 
 data class RList(
     @SerializedName("id")
@@ -75,7 +77,7 @@ data class RList(
 
     @SerializedName("name")
     val name: String
-)
+) : Serializable
 
 data class GenreList(
     @SerializedName("key")
@@ -83,4 +85,4 @@ data class GenreList(
 
     @SerializedName("value")
     val value: String
-)
+) : Serializable

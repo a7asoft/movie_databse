@@ -1,5 +1,7 @@
 package com.ionix.moviedatabase.ui.main
 
+import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,6 +11,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.flowWithLifecycle
@@ -18,6 +22,7 @@ import com.ionix.moviedatabase.R
 import com.ionix.moviedatabase.data.remote.dto.Movie
 import com.ionix.moviedatabase.data.remote.dto.MovieListResponseModel
 import com.ionix.moviedatabase.databinding.ActivityMainBinding
+import com.ionix.moviedatabase.ui.detail.MovieDetailActivity
 import com.ionix.moviedatabase.ui.main.adapters.MoviesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -35,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -58,6 +64,13 @@ class MainActivity : AppCompatActivity() {
             layoutManager = GridLayoutManager(this@MainActivity, 2)
         }
         binding.rvPopular.setHasFixedSize(true)
+        mAdapter.setItemTapListener(object : MoviesAdapter.OnItemTap {
+            override fun onTap(movie: Movie) {
+                val intent = Intent(this@MainActivity, MovieDetailActivity::class.java)
+                intent.putExtra("MOVIE", movie)
+                startActivity(intent)
+            }
+        })
     }
 
     private fun observe() {
@@ -99,6 +112,8 @@ class MainActivity : AppCompatActivity() {
         listGenres.forEach { genreString ->
             val chip = layoutInflater.inflate(R.layout.chip_filter, null, false) as Chip
             chip.text = genreString
+            chip.setTextColor(resources.getColor(R.color.texts))
+            chip.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(this@MainActivity, R.color.grey_100))
             val paddingDp = TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, 10f,
                 resources.displayMetrics
@@ -131,7 +146,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getDate(releaseState: String): Date {
-        val format = SimpleDateFormat("dd LLL yyyy", Locale.getDefault())
+        val format = SimpleDateFormat("dd LLL yyyy", Locale.US)
         var date = Date()
         try {
             date = format.parse(releaseState) as Date

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Movie Database</string>
+    <string name="retry">RETRY</string>
+    <string name="similar_movies">Similar movies:</string>
+    <string name="directors">Directors:</string>
+    <string name="synopsis">Synopsis:</string>
+    <string name="search_movies">Search movies</string>
+    <string name="popular_movies">Popular movies</string>
 </resources>
