@@ -1,6 +1,7 @@
 package com.ionix.moviedatabase.di
 
 import android.content.Context
+import com.ionix.moviedatabase.BuildConfig
 import com.ionix.moviedatabase.MoviesApp
 import com.ionix.moviedatabase.data.remote.api.MoviesApi
 import com.ionix.moviedatabase.data.repository.MoviesRepositoryImpl
@@ -27,7 +28,7 @@ class AppModule {
         return Retrofit.Builder().apply {
             addConverterFactory(GsonConverterFactory.create())
             client(okHttp)
-            baseUrl("https://my.api.mockaroo.com/")
+            baseUrl(BuildConfig.BASE_URL)
         }.build()
     }
 

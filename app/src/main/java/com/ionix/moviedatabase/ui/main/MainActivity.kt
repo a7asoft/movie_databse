@@ -1,28 +1,31 @@
 package com.ionix.moviedatabase.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.flowWithLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.ionix.moviedatabase.R
+import com.ionix.moviedatabase.data.remote.dto.Movie
 import com.ionix.moviedatabase.data.remote.dto.MovieListResponseModel
 import com.ionix.moviedatabase.databinding.ActivityMainBinding
 import com.ionix.moviedatabase.ui.main.adapters.MoviesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private var movieList = mutableListOf<Movie>()
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
 
@@ -68,13 +71,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleMovies(data: MovieListResponseModel) {
         Log.wtf("DATA", "$data")
-
+        movieList = data.items as MutableList<Movie>
         //update movies
-        binding.rvPopular.adapter?.let {
+        binding.rvPopular.adapter?.let { it ->
             if (it is MoviesAdapter) {
-                it.updateList(data.items)
+                val ordered = data.items.sortedBy { getDate(it.releaseState) }.distinct().toList().reversed()
+                it.updateList(ordered)
             }
         }
+    }
+
+    private fun getDate(releaseState: String): Date {
+        val format = SimpleDateFormat("dd LLL yyyy", Locale.getDefault())
+        var date = Date()
+        try {
+            date = format.parse(releaseState) as Date
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return date
     }
 
     private fun observeState() {
@@ -111,5 +126,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun listeners() {
 
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                // noop
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                // noop
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                val filterList =
+                    movieList.filter { it.title.lowercase().contains(s.toString().lowercase()) }
+                binding.rvPopular.adapter?.let {
+                    if (it is MoviesAdapter) {
+                        it.updateList(filterList)
+                    }
+                }
+            }
+        })
     }
 }

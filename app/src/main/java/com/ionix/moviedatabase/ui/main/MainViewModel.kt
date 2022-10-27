@@ -1,5 +1,6 @@
 package com.ionix.moviedatabase.ui.main
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ionix.moviedatabase.BuildConfig
@@ -59,7 +60,8 @@ class MainViewModel @Inject constructor(
                             _movies.tryEmit(result.data)
                         }
                         is BaseResult.Error -> {
-                            //showToast(result.rawResponse.message)
+                            showError(result.rawResponse.error)
+                            Log.wtf("BaseResult.Error","${result.rawResponse}")
                         }
                     }
                 }

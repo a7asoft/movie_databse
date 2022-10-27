@@ -1,10 +1,13 @@
 package com.ionix.moviedatabase.ui.main.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.ionix.moviedatabase.data.remote.dto.Movie
 import com.ionix.moviedatabase.databinding.ItemMovieBinding
@@ -22,8 +25,16 @@ class MoviesAdapter(private val docs: MutableList<Movie>, private val context: C
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(movie: Movie) {
             itemBinding.tvMovieTitle.text = movie.title
+            itemBinding.tvMovieTitle.isSelected = true
+            itemBinding.tvImdb.text = movie.imDbRating
+            if (movie.contentRating != "") {
+                itemBinding.tvContentRating.text = movie.contentRating
+            } else {
+                itemBinding.linearContentRating.visibility = View.GONE
+            }
             Glide.with(context).load(movie.image)
                 .transition(DrawableTransitionOptions.withCrossFade())
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .into(itemBinding.ivMoviePoster)
         }
     }
