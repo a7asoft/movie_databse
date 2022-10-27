@@ -26,10 +26,10 @@
             android:fontFamily="@font/sourcesanspro_regular"
             android:hint="@string/search_movies"
             android:imeOptions="actionDone"
-            android:textColor="@color/texts"
             android:inputType="text"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
+            android:textColor="@color/texts"
             android:textSize="15sp" />
 
         <ImageButton
@@ -182,7 +182,8 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:text="@string/retry"
-                android:textColor="@color/background"
+                android:textColor="@color/black"
+                app:backgroundTint="@color/yellow_600"
                 app:cornerRadius="30dp" />
 
         </LinearLayout>
